@@ -47,14 +47,6 @@ export default {
             CanvasEventHandler.init(world)
             StageEventHandler.init(world)
         })
-
-
-        //
-        // Help
-        //
-        document.querySelector('#help').addEventListener('click', (e) => {
-            console.log('help')
-        })
     },
 
     downloadURI(uri, name) {
