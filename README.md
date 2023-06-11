@@ -2,7 +2,9 @@
 Very simple drawing canvas
 
 # How to use
-https://github.com/maloninc/simple-canvas/assets/15218/15a4b6dd-aa05-44c7-94d6-65c21f057f19
+https://github.com/maloninc/simple-canvas/assets/15218/5a9a598b-aac9-48f9-930b-3cae1a2221a7
+
+
 
 
 
