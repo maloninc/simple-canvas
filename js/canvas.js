@@ -159,7 +159,7 @@ export default {
                 const textPosition = textNode.getAbsolutePosition()
 
                 // then lets find position of stage container on the page:
-                const stageBox = stage.container().getBoundingClientRect()
+                const stageBox = world.stage.container().getBoundingClientRect()
 
                 // so position of textarea will be the sum of positions above:
                 const areaPosition = {
