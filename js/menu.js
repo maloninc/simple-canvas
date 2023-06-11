@@ -32,20 +32,44 @@ export default {
         //
         // Load
         //
-        document.querySelector('#load').addEventListener('click', (e) => {
-            const jsonStr = '{"attrs":{"width":1440,"height":532},"className":"Stage","children":[{"attrs":{"name":"layer"},"className":"Layer","children":[{"attrs":{"fill":"rgba(0,0,255,0.5)","name":"selector_rect","visible":false},"className":"Rect"},{"attrs":{"x":385,"y":194.5,"stroke":"black","strokeWidth":4,"strokeScaleEnabled":false,"fill":"","radius":71.58784877498204,"draggable":true,"name":"myObject"},"className":"Circle"},{"attrs":{"name":"transformer","ignoreStroke":true,"padding":5,"keepRatio":false},"className":"Transformer"},{"attrs":{"name":"group","draggable":true},"className":"Group","children":[{"attrs":{"x":574,"y":276,"stroke":"black","strokeWidth":4,"strokeScaleEnabled":false,"fill":"","width":194,"height":105,"name":"myObject"},"className":"Rect"},{"attrs":{"x":649,"y":326,"text":"New Text","fontSize":18,"name":"textNode","fill":"black"},"className":"Text"}]},{"attrs":{"points":[1324,112,1324,112],"stroke":"black","strokeWidth":4,"strokeScaleEnabled":false,"fill":"","draggable":true,"name":"myObject"},"className":"Line"}]}]}'
-            world.stage = Konva.Node.create(jsonStr, 'container');
-            world.layer = world.stage.children[0]
-            world.transformer = world.layer.children.find(c => c.name() == 'transformer')
-            world.selectionRectangle = world.layer.children.find(c => c.name() == 'selector_rect')
+        document.querySelector('#file').addEventListener('change', (e) => {
+            UIkit.modal(document.querySelector('#load-modal')).hide();
+            const input = e.target;
+            if (input.files.length == 0) {
+                return;
+            }
 
-            const canvas = document.querySelector('#container canvas')
-            const ctx = canvas.getContext('2d')
-            world.canvas = canvas
-            world.ctx = ctx
+            const file = input.files[0];
+            const reader = new FileReader();
+            reader.onload = () => {
+                const jsonStr = reader.result;
+                try {
+                    world.stage = Konva.Node.create(jsonStr, 'container');
+                } catch {
+                    UIkit.notification({
+                        message: `Can't load this JSON file.`,
+                        status: 'danger',
+                        timeout: 5000,
+                    });
+                    input.value = null
+                    return
+                }
+                world.layer = world.stage.children[0]
+                world.transformer = world.layer.children.find(c => c.name() == 'transformer')
+                world.selectionRectangle = world.layer.children.find(c => c.name() == 'selector_rect')
 
-            CanvasEventHandler.init(world)
-            StageEventHandler.init(world)
+                const canvas = document.querySelector('#container canvas')
+                const ctx = canvas.getContext('2d')
+                world.canvas = canvas
+                world.ctx = ctx
+
+                CanvasEventHandler.init(world)
+                StageEventHandler.init(world)
+
+                input.value = null
+            };
+
+            reader.readAsText(file);
         })
     },
 
