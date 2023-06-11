@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Canvas</title>
+    <meta charset="utf-8" />
+    <meta name="app:version" content="1.0">
+    <meta name="description" content="Very simple drawing canvas">
+
+    <!-- KONVA -->
+    <script src="https://unpkg.com/konva@9.2.0/konva.min.js"></script>
+
+    <!-- DollerJS -->
+    <script src="lib/doller.js"></script>
+
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.19/dist/css/uikit.min.css" />
+    
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.19/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.19/dist/js/uikit-icons.min.js"></script>
+
+    <!-- modules -->
+    <script src="js/main.js" type="module"></script>
+</head>
+
+<body>
+    <div class="header uk-navbar-container">
+        <div class="uk-container uk-container-expand">
+            <nav class="uk-navbar-container" uk-navbar>
+                <div class="uk-navbar-left">
+                    <a href="/" class="uk-navbar-item uk-logo">
+                        Simple Canvas
+                    </a>
+                </div>
+                <div class="uk-navbar-right">
+                    <ul class="uk-navbar-nav">
+                        <li class=""><a href="#help-modal" uk-toggle id="help">Help</a></li>
+                        <li class="">
+                            <a href="#">Save</a>
+                            <div class="uk-navbar-dropdown" mode="click">
+                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                    <li><a href="#" id="save-as-png">as PNG</a></li>
+                                    <li><a href="#" id="save-as-json">as JSON</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class=""><a href="#" id="load">Load</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div id="container" style="position: absolute; top:0; z-index: -999"></div>
+
+    <!-- Help modal -->
+    <div id="help-modal" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+            <h2 class="uk-modal-title">How to use</h2>
+            <video controls width="800" loop muted autoplay>
+                <source src="media/help.mp4" type="video/mp4">
+            </video>
+            <p class="uk-text-right">
+                <button class="uk-button uk-button-default uk-modal-close" type="button">Close</button>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
